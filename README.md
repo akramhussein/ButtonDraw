@@ -1,8 +1,6 @@
 # ButtonDraw
 
-iOS App to control a MakeBlock XY-Plotter Robot, specifically designed for a switch access headset.
-
-[XY Plotter](http://store.makeblock.com/xy-plotter-robot-kit/)
+iOS App to control a [MakeBlock XY-Plotter Robot](http://store.makeblock.com/xy-plotter-robot-kit/), specifically designed for a switch access headset.
 
 ## Screenshot
 
