@@ -4,6 +4,10 @@ iOS App to control a MakeBlock XY-Plotter Robot, specifically designed for a swi
 
 [XY Plotter](http://store.makeblock.com/xy-plotter-robot-kit/)
 
+## Screenshot
+
+<img src="screenshot.png" width="200">
+
 ## Requirements
 
 * [Xcode](https://developer.apple.com/xcode/download/)
