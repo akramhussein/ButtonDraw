@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeviceViewController" customModule="ButtonDraw" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="mke-11-Gpq" id="Bfn-ZM-mUu"/>
+                <outlet property="button" destination="Sdq-D9-Hcd" id="0ni-sa-LBI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdq-D9-Hcd">
+                    <rect key="frame" x="15" y="15" width="345" height="345"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Sdq-D9-Hcd" secondAttribute="height" multiplier="1:1" id="FEI-2r-ZcL"/>
+                    </constraints>
+                    <state key="normal" image="north"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xfj-6S-KE6" userLabel="Center Line">
+                    <rect key="frame" x="187.5" y="333.5" width="0.0" height="0.0"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="YtV-h2-uGc"/>
+                        <constraint firstAttribute="height" id="a0R-Rm-ntP"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mke-11-Gpq">
+                    <rect key="frame" x="15" y="410" width="345" height="242"/>
+                    <color key="backgroundColor" red="0.0" green="0.66274509800000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" image="pen_up">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="actionButtonPressed:" destination="-1" eventType="touchUpInside" id="Iet-Lu-RLa"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Xfj-6S-KE6" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="1NH-EP-kE4"/>
+                <constraint firstItem="Sdq-D9-Hcd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="1cn-cJ-8a2"/>
+                <constraint firstItem="Sdq-D9-Hcd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="8hZ-Qv-afe"/>
+                <constraint firstItem="Xfj-6S-KE6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Fey-ET-1Ja"/>
+                <constraint firstAttribute="trailing" secondItem="mke-11-Gpq" secondAttribute="trailing" constant="15" id="HVI-Fp-PJE"/>
+                <constraint firstItem="mke-11-Gpq" firstAttribute="top" secondItem="Sdq-D9-Hcd" secondAttribute="bottom" constant="50" id="WLE-xh-QIM"/>
+                <constraint firstAttribute="trailing" secondItem="Sdq-D9-Hcd" secondAttribute="trailing" constant="15" id="YVA-4N-uTY"/>
+                <constraint firstItem="mke-11-Gpq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="hDm-gd-sCe"/>
+                <constraint firstAttribute="bottom" secondItem="mke-11-Gpq" secondAttribute="bottom" constant="15" id="wGm-zw-uMA"/>
+            </constraints>
+            <point key="canvasLocation" x="34.5" y="164.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="north" width="314" height="314"/>
+        <image name="pen_up" width="246" height="218"/>
+    </resources>
+</document>
