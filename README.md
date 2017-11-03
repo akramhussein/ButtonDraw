@@ -13,9 +13,9 @@ iOS App to control a [MakeBlock XY-Plotter Robot](http://store.makeblock.com/xy-
 
 ## Installation Instructions
 
-1. Download the [source code](https://github.com/akramhussein/button-draw)
+1. Download the [source code](https://github.com/akramhussein/ButtonDraw)
 
-  `$ git clone git@github.com:akramhussein/button-draw.git`
+  `$ git clone git@github.com:akramhussein/ButtonDraw.git`
 
 2. Install [cocoapods](https://cocoapods.org/)
 
@@ -33,4 +33,4 @@ iOS App to control a [MakeBlock XY-Plotter Robot](http://store.makeblock.com/xy-
 
 ## License
 
-button-draw is available under the MIT License
+ButtonDraw is available under the MIT License
