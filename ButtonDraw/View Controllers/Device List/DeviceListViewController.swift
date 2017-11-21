@@ -51,6 +51,9 @@ final class DeviceListViewController: UIViewController {
             }
         }
 
+        let vc = DeviceViewController(connection: self.connection, device: self.selectedDevice)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
         self.connection.onConnect = {
             if self.selectedDevice != nil {
                 self.connectionTimer.invalidate()

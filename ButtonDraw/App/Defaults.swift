@@ -10,6 +10,7 @@ import Foundation
 
 public struct Key {
     public static let ScanningSpeed = "ScanningSpeed"
+    public static let StickerDelay = "StickerDelay"
 }
 
 public struct Defaults {

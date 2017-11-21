@@ -84,6 +84,8 @@ final class DeviceViewController: UIViewController {
         return UIImage(named: "pen_\(self.penPosition.next.rawValue)")!.withRenderingMode(.alwaysTemplate)
     }
     
+    var actionButtonGesture: UILongPressGestureRecognizer!
+    
     @IBOutlet weak var actionButton: UIButton! {
         didSet {
             self.actionButton.backgroundColor = .blue
@@ -94,11 +96,7 @@ final class DeviceViewController: UIViewController {
             self.actionButton.contentVerticalAlignment = .fill
             self.actionButton.imageView?.contentMode = .scaleAspectFit
             self.actionButton.imageEdgeInsets = UIEdgeInsetsMake(20, 20, 20, 20)
-            
-            let gesture = UILongPressGestureRecognizer(target: self,
-                                                       action: #selector(DeviceViewController.longPressGestureActionButton(recognizer:)))
-            gesture.minimumPressDuration = 1
-            self.actionButton.addGestureRecognizer(gesture)
+        
         }
     }
 
@@ -109,7 +107,7 @@ final class DeviceViewController: UIViewController {
 
     private var connection: BluetoothConnection!
     private var mBot: MBot!
-    private var device: BluetoothDevice!
+    private var device: BluetoothDevice?
     private var arrowImage = UIImage(named: "Arrow")!
 
     private var x: Double = DeviceViewController.MinX
@@ -129,7 +127,7 @@ final class DeviceViewController: UIViewController {
     private var enterTimer = Timer() // enter keyboard button
     private var spaceTimer = Timer() // space keyboard button
     
-    private var spaceDelay: Double = 0.4
+
     
     private var buttonTimer = Timer() // main button
 
@@ -146,6 +144,15 @@ final class DeviceViewController: UIViewController {
         let speed = Defaults.getUserDefaultsValueForKeyAsDouble(Key.ScanningSpeed)
         if speed == 0.0 {
             Defaults.setUserDefaultsKey(Key.ScanningSpeed, value: 1.0)
+            return 1.0
+        }
+        return speed
+    }
+    
+    var stickerDelay: Double {
+        let speed = Defaults.getUserDefaultsValueForKeyAsDouble(Key.StickerDelay)
+        if speed == 0.0 {
+            Defaults.setUserDefaultsKey(Key.StickerDelay, value: 1.0)
             return 1.0
         }
         return speed
@@ -203,7 +210,7 @@ final class DeviceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "\(self.device.name)"
+        self.navigationItem.title = "\(self.device?.name ?? "Drawing")"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(DeviceViewController.backPressed(_:)))
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(DeviceViewController.settingsPressed(_:)))
@@ -212,6 +219,12 @@ final class DeviceViewController: UIViewController {
         self.mBot.sendXYReset()
 //        self.penPosition = .up
 //        self.mBot.sendXYDraw(x: DeviceViewController.MinX, y: DeviceViewController.MinY)
+        
+        self.actionButtonGesture = UILongPressGestureRecognizer(target: self,
+                                                               action: #selector(DeviceViewController.longPressGestureActionButton(recognizer:)))
+        
+        self.actionButtonGesture.minimumPressDuration = self.stickerDelay
+        self.actionButton.addGestureRecognizer(self.actionButtonGesture)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.scanning = true
@@ -225,7 +238,7 @@ final class DeviceViewController: UIViewController {
     
     // MARK: Init
 
-    init(connection: BluetoothConnection, device: BluetoothDevice) {
+    init(connection: BluetoothConnection, device: BluetoothDevice?) {
         self.connection = connection
         self.device = device
         self.mBot = MBot(connection: self.connection)
@@ -395,8 +408,11 @@ final class DeviceViewController: UIViewController {
     }
     
     @objc func settingsPressed(_ sender: Any) {
-        let vc = DeviceSettingsViewController(scanningSpeed: self.scanningSpeed) { scanningSpeed in
+        let vc = DeviceSettingsViewController(scanningSpeed: self.scanningSpeed, stickerDelay: self.stickerDelay) { scanningSpeed, stickerDelay in
             Defaults.setUserDefaultsKey(Key.ScanningSpeed, value: scanningSpeed)
+            Defaults.setUserDefaultsKey(Key.StickerDelay, value: stickerDelay)
+            
+            self.actionButtonGesture.minimumPressDuration = self.stickerDelay
             
             self.buttonTimer.invalidate()
             self.buttonTimer = Timer.scheduledTimer(timeInterval: self.scanningSpeed,
@@ -461,7 +477,7 @@ final class DeviceViewController: UIViewController {
         }
         
         self.spaceTimer.invalidate()
-        self.spaceTimer = Timer.scheduledTimer(timeInterval: self.spaceDelay,
+        self.spaceTimer = Timer.scheduledTimer(timeInterval: self.stickerDelay,
                                                target: self,
                                                selector: #selector(DeviceViewController.spaceReleased(_:)),
                                                userInfo: nil,
